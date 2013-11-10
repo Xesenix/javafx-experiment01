@@ -8,12 +8,24 @@
  * Contributors:
  *     Paweł Kapalla, Xessenix - initial API and implementation
  ******************************************************************************/
-package pl.xesenix.experiments.experiment01.commands;
+package pl.xesenix.experiments.experiment01.requests;
 
 import javafx.concurrent.Service;
+import javafx.concurrent.Task;
 
-public interface ICommandProvider
+
+public class CommitPropertyEditCommand<T> extends Service<Void>
 {
-	@SuppressWarnings("rawtypes")
-	<T extends Service> T get(Class<T> type);
+	@Override
+	protected Task<Void> createTask()
+	{
+		return new Task<Void>() {
+
+			protected Void call() throws Exception
+			{
+				return null;
+			}
+		};
+	}
+
 }

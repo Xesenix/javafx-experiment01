@@ -8,29 +8,12 @@
  * Contributors:
  *     Paweł Kapalla, Xessenix - initial API and implementation
  ******************************************************************************/
-package pl.xesenix.experiments.experiment01.commands;
+package pl.xesenix.experiments.experiment01.requests;
 
 import javafx.concurrent.Service;
-import javafx.concurrent.Task;
-import pl.xesenix.experiments.experiment01.vo.Person;
 
-
-public class LoadPersonDetailsCommand extends Service<Person>
+public interface IRequestProvider
 {
-	public Person person;
-
-
-	@Override
-	protected Task<Person> createTask()
-	{
-		return new Task<Person>() {
-
-			@Override
-			protected Person call() throws Exception
-			{
-				return person;
-			}
-		};
-	}
-
+	@SuppressWarnings("rawtypes")
+	<T extends Service> T get(Class<T> type);
 }

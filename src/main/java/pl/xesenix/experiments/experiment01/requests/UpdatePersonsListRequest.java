@@ -8,25 +8,33 @@
  * Contributors:
  *     Paweł Kapalla, Xessenix - initial API and implementation
  ******************************************************************************/
-package pl.xesenix.experiments.experiment01.commands;
+package pl.xesenix.experiments.experiment01.requests;
 
+import javafx.collections.ObservableList;
 import javafx.concurrent.Service;
+import javafx.concurrent.Task;
+import pl.xesenix.experiments.experiment01.service.IPersonService;
+import pl.xesenix.experiments.experiment01.vo.Person;
 
 import com.google.inject.Inject;
-import com.google.inject.Injector;
-import com.google.inject.Singleton;
 
-@Singleton
-public class CommandProvider implements ICommandProvider
+
+public class UpdatePersonsListRequest extends Service<ObservableList<Person>>
 {
 	@Inject
-	public Injector injector;
+	public IPersonService personService;
 
 
-	@SuppressWarnings("rawtypes")
-	public <T extends Service> T get(Class<T> type)
+	@Override
+	protected Task<ObservableList<Person>> createTask()
 	{
-		 return injector.getInstance(type);
-	}
+		return new Task<ObservableList<Person>>() {
 
+			@Override
+			protected ObservableList<Person> call() throws Exception
+			{
+				return personService.getPersons();
+			}
+		};
+	}
 }

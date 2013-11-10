@@ -8,35 +8,29 @@
  * Contributors:
  *     Paweł Kapalla, Xessenix - initial API and implementation
  ******************************************************************************/
-package pl.xesenix.experiments.experiment01.commands;
+package pl.xesenix.experiments.experiment01.requests;
 
-import javafx.collections.ObservableList;
 import javafx.concurrent.Service;
 import javafx.concurrent.Task;
-import pl.xesenix.experiments.experiment01.service.IPersonService;
 import pl.xesenix.experiments.experiment01.vo.Person;
 
-import com.google.inject.Inject;
 
-
-public class LoadPersonsListCommand extends Service<ObservableList<Person>>
+public class LoadPersonDetailsRequest extends Service<Person>
 {
-	@Inject
-	public IPersonService personService;
+	public Person person;
 
 
 	@Override
-	protected Task<ObservableList<Person>> createTask()
+	protected Task<Person> createTask()
 	{
-		return new Task<ObservableList<Person>>() {
+		return new Task<Person>() {
 
 			@Override
-			protected ObservableList<Person> call() throws Exception
+			protected Person call() throws Exception
 			{
-				personService.loadPersons();
-				
-				return personService.getPersons();
+				return person;
 			}
 		};
 	}
+
 }

@@ -8,24 +8,35 @@
  * Contributors:
  *     Paweł Kapalla, Xessenix - initial API and implementation
  ******************************************************************************/
-package pl.xesenix.experiments.experiment01.commands;
+package pl.xesenix.experiments.experiment01.requests;
 
+import javafx.collections.ObservableList;
 import javafx.concurrent.Service;
 import javafx.concurrent.Task;
+import pl.xesenix.experiments.experiment01.service.IPersonService;
+import pl.xesenix.experiments.experiment01.vo.Person;
+
+import com.google.inject.Inject;
 
 
-public class CommitPropertyEditCommand<T> extends Service<Void>
+public class LoadPersonsListRequest extends Service<ObservableList<Person>>
 {
-	@Override
-	protected Task<Void> createTask()
-	{
-		return new Task<Void>() {
+	@Inject
+	public IPersonService personService;
 
-			protected Void call() throws Exception
+
+	@Override
+	protected Task<ObservableList<Person>> createTask()
+	{
+		return new Task<ObservableList<Person>>() {
+
+			@Override
+			protected ObservableList<Person> call() throws Exception
 			{
-				return null;
+				personService.loadPersons();
+				
+				return personService.getPersons();
 			}
 		};
 	}
-
 }
