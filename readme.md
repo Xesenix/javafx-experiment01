@@ -1,7 +1,7 @@
 ![Experiment01 screen](/images/screen00.png "Experiment01")
 
 Experiment01
-------------
+============
 
 Binding application data to view with use of mediator pattern.
 
@@ -18,12 +18,12 @@ Tasks:
 - [x] binding person age to age field
 
 Summary
-=======
+-------
 
 Didn`t work lack of decoupling of view object representation from backend object representation.
 
 Links
-=====
+-----
 
 For more experiments:
-[Experiments project](/..)
+[Experiments project](https://github.com/Xesenix/javafx-experiments)
